@@ -12,7 +12,7 @@ import { useCartContext } from "../context/cartContext";
 import {LiqPay} from "../payment/liqpay";
 import { commerce } from "../lib/commerce";
 
-const payment = new LiqPay('sandbox_i3877493362', 'sandbox_cz5z0KfADUcCRcRpYNpbToMcXMkDbAZDs4Fvg2Nh')
+const payment = new LiqPay(process.env.PUBLIC_KEY_LIQPAY, process.env.PRIVATE_KEY_LIQPAY)
 
 
 const Cheakout = () => {
