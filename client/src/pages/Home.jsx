@@ -1,5 +1,4 @@
 import React from "react";
-// import styled from "styled-components";
 import FeatureProduct from "../components/FeatureProducts";
 import HeroSection from "../components/HeroSection";
 import Services from "../components/Services";

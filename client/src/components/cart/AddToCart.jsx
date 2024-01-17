@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import CartAmountToggle from "./CartAmountToggle";
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Button } from "../../styles/Button";
 import { useCartContext } from "../../context/cartContext";
 
@@ -10,6 +10,7 @@ const AddToCart = ({ updateQuantity, product }) => {
   const {id} = product;
 
   const [amount, setAmount] = useState(1);
+  const navigate = useNavigate();
 
   const setDecrease = () => {
     amount > 1 ? setAmount(amount - 1) : setAmount(1);
@@ -30,9 +31,9 @@ const AddToCart = ({ updateQuantity, product }) => {
         setIncrease={setIncrease}
       />
 
-      <NavLink to="/cart" onClick={() => addToCart(id, amount, product)}>
-        <Button className="btn">Додати до кошика</Button>
-      </NavLink>
+
+      <Button className="btn" onClick={() => {addToCart(id, amount, product); navigate("/")} }>Додати до кошика</Button>
+
     </Wrapper>
   );
 };

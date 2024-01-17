@@ -1,12 +1,14 @@
 export const renderDefaultCoffee = (categories) => {
     switch (categories[0].slug) {
-      case "beer":
-        return "../images/beer.jpeg";
-      case "cidre":
-        return "../images/cidre.jpeg";
-      case "wine":
-        return "../images/beer.jpeg";
+      case "coffee":
+        return "../images/coffee1.jpeg";
+      case "drink":
+        return "../images/drink.png";
+      case "espresso":
+        return "../images/espresso.jpeg";
+      case "bakery":
+        return "../images/bakery.jpeg";
       default:
-        return "../images/beer.jpeg";
+        return "../images/coffee1.jpeg";
     }
   };

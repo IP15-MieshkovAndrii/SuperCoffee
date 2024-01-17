@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom"; 
 import { renderDefaultCoffee } from "../../functions/images";
 
 const Product = (curElem) => {
@@ -8,8 +8,9 @@ const Product = (curElem) => {
   let coffee = ""
   if (image) coffee = image.url;
   defCoffee = renderDefaultCoffee(categories);
+  const navigate = useNavigate();
   return (
-    <NavLink to={`/singleproduct/${id}`}>
+    <span onClick={navigate(`/singleproduct/${id}`)}>
       <div className="card">
         <figure>
           <img src={coffee || defCoffee} alt={name} />
@@ -23,7 +24,7 @@ const Product = (curElem) => {
           </div>
         </div>
       </div>
-    </NavLink>
+    </span>
   );
 };
 

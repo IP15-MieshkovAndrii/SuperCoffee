@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/iframe-has-title */
 import React from "react";
-// import { NavLink } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Button } from "../styles/Button";
 import { BsInstagram } from "react-icons/bs";

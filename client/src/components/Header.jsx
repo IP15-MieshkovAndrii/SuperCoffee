@@ -1,18 +1,18 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Nav from "./nav/Nav";
 import "./stars.scss"
 
 
 const Header = () => {
-
+    const navigate = useNavigate(); 
 
     return (
         <MainHeader>
-            <NavLink to="/">
-                <img className="logo" src="./images/logo.jpeg" alt="SuperCoffee logo"/>
-            </NavLink>
+
+            <img className="logo" src="./images/logo.jpeg" alt="SuperCoffee logo" onClick={() => navigate("/")}/>
+
             <div className="bg-animation">
                 <div id="stars"></div>
                 <div id="stars2"></div>

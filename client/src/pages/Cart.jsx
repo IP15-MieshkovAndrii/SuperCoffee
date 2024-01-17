@@ -2,19 +2,20 @@ import React from "react";
 import styled from "styled-components";
 import { useCartContext } from "../context/cartContext";
 import CartItem from "../components/cart/CartItem";
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Button } from "../styles/Button";
 
 const Cart = () => {
   const {cart, clearCart, totalPrice, shippingFee} = useCartContext();
+  const navigate = useNavigate();
 
   if (cart.length === 0) {
     return (
       <EmptyDiv>
        <h3>Кошик порожній</h3>
-       <NavLink to="/products">
-          <Button> Продовжити шопінг </Button>
-        </NavLink>
+
+        <Button onClick={navigate("/products")}> Продовжити шопінг </Button>
+
       </EmptyDiv>
     );
   }
@@ -37,9 +38,9 @@ const Cart = () => {
         </div>
         <hr />
         <div className="cart-two-button">
-          <NavLink to="/products">
-            <Button> Продовжити шопінг </Button>
-          </NavLink>
+
+          <Button onClick={navigate("/products")}> Продовжити шопінг </Button>
+
           <Button className="btn btn-clear" onClick={clearCart}>
             очистити кошик
           </Button>
@@ -69,14 +70,12 @@ const Cart = () => {
           </div>
         </div>
         <div className="cheak-out">
-        <NavLink to="/cheakout">
           <Button 
             className="btn btn-checkout"
-            // onClick={goToCheckout}
+            onClick={navigate("/cheakout")}
           >
               Оформити замовлення
           </Button>
-        </NavLink>
       </div>
       </div>
     </Wrapper>

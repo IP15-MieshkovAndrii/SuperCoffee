@@ -1,9 +1,10 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Button } from "../styles/Button";
 
 const HeroSection = ({myData}) => {
+    const navigate = useNavigate();
     const name = myData.name
     return (
         <Wrapper>
@@ -26,9 +27,9 @@ const HeroSection = ({myData}) => {
                         </p>
                         <br/>
 
-                        <NavLink to="/products">
-                            <Button>Перейти до меню</Button>
-                        </NavLink>
+
+                        <Button onClick={() => navigate("/products")}>Перейти до меню</Button>
+
                     </div>
 
                     <div className="hero-section-image">

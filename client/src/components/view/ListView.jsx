@@ -1,9 +1,10 @@
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Button } from "../../styles/Button";
 import { renderDefaultCoffee } from "../../functions/images";
 
 const ListView = ({ products }) => {
+  const navigate = useNavigate();
 
   return (
     <Wrapper className="section">
@@ -28,9 +29,9 @@ const ListView = ({ products }) => {
                 </p>
                 <p dangerouslySetInnerHTML={{ __html: truncatedDescription }}></p>
 
-                <NavLink to={`/singleproduct/${id}`} className="btn-main">
+                <span onClick={navigate(`/singleproduct/${id}`)} className="btn-main">
                   <Button className="btn">Показати більше</Button>
-                </NavLink>
+                </span>
               </div>
             </div>
           );
