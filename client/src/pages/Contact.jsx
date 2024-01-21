@@ -1,13 +1,13 @@
 /* eslint-disable jsx-a11y/iframe-has-title */
 import React from "react";
-// import { useNavigate } from "react-router-dom";
+// import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { Button } from "../styles/Button";
 import { BsInstagram } from "react-icons/bs";
 
 const Contact = () => {
 
-  const url = "https://www.instagram.com/";
+  const url = "https://www.instagram.com";
   const handleButtonClick = () => {
     window.location.href = url;
   };

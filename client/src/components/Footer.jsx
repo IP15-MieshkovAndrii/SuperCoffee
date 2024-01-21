@@ -6,7 +6,6 @@ import "./stars.scss"
 
 const Footer = () => {
     return (
-        // <>
         <Wrapper>
   
           <footer>

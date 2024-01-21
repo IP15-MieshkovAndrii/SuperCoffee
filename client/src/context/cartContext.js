@@ -1,5 +1,7 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
 import reducer from "../reducer/cartReducer";
+import { postAction } from "../api/actions";
+import { useAuthState } from "../config/firebase";
 
 const CartContext = createContext();
 
@@ -13,7 +15,6 @@ const getLocaleCartData = () => {
 }
 
 const initialState = {
-  // cart: [],
   cart: getLocaleCartData(),
   totalItem: "10",
   totalAmount: "",
@@ -22,9 +23,23 @@ const initialState = {
 
 const CartProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const { uid, isAuthenticated } = useAuthState();
 
-  const addToCart = (id, amount, product) => {
-    dispatch({ type: "ADD_TO_CART", payload: { id, amount, product } });
+  const addToCart = async(id, amount, product) => {
+    try {
+      if(isAuthenticated){
+        await postAction({
+          user_id: uid,
+          product_id: id,
+          action_type: `cart`,
+      });
+      }
+
+      dispatch({ type: "ADD_TO_CART", payload: { id, amount, product } });
+    } catch (error) {
+      console.error('Error posting action and updating filters:', error);
+    }
+
   };
 
   const setDecrease = (id) => {

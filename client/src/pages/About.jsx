@@ -4,7 +4,7 @@ import HeroSection from "../components/HeroSection";
 const About = () => {
 
     const data = {
-        name: "SuperCoffee - super energy",
+        name: "SuperCoffee",
     }
     return (
         <>

@@ -72,7 +72,7 @@ const Login = () => {
   const signIn = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((data) => {
-        if (data) navigate("/profile");
+        if (data) navigate("/");
       })
       .catch((error) => {
         console.log(error.code);
@@ -97,7 +97,7 @@ const Login = () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(getAuth(), provider)
       .then((result) => {
-        if (result) navigate("/profile");
+        if (result) navigate("/");
       })
       .catch((error) => {
         console.log(error.code);

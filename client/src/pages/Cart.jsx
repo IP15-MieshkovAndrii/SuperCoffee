@@ -1,21 +1,44 @@
 import React from "react";
 import styled from "styled-components";
 import { useCartContext } from "../context/cartContext";
-import CartItem from "../components/cart/CartItem";
-import { useNavigate } from "react-router-dom";
+import CartItem from "../components/CartItem";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Button } from "../styles/Button";
+import { postAction } from "../api/actions";
+import { useAuthState } from "../config/firebase";
 
 const Cart = () => {
   const {cart, clearCart, totalPrice, shippingFee} = useCartContext();
+  const { uid, isAuthenticated } = useAuthState();
+
   const navigate = useNavigate();
+  const handleCheckout = async () => {
+    try {
+      if(isAuthenticated){
+        await Promise.all(
+          cart.map(async (elem) => {
+            await postAction({
+              user_id: uid,
+              action_type: 'payment',
+              product_id: elem.id,
+            });
+          })
+        );
+      }
+
+      navigate('/checkout');
+    } catch (error) {
+      console.error('Error during checkout:', error);
+    }
+  };
 
   if (cart.length === 0) {
     return (
       <EmptyDiv>
        <h3>Кошик порожній</h3>
-
-        <Button onClick={navigate("/products")}> Продовжити шопінг </Button>
-
+       <NavLink to="/products">
+          <Button> Продовжити шопінг </Button>
+        </NavLink>
       </EmptyDiv>
     );
   }
@@ -38,9 +61,9 @@ const Cart = () => {
         </div>
         <hr />
         <div className="cart-two-button">
-
-          <Button onClick={navigate("/products")}> Продовжити шопінг </Button>
-
+          <NavLink to="/products">
+            <Button> Продовжити шопінг </Button>
+          </NavLink>
           <Button className="btn btn-clear" onClick={clearCart}>
             очистити кошик
           </Button>
@@ -69,13 +92,15 @@ const Cart = () => {
             </div>
           </div>
         </div>
-        <div className="cheak-out">
-          <Button 
-            className="btn btn-checkout"
-            onClick={navigate("/cheakout")}
-          >
-              Оформити замовлення
-          </Button>
+        <div className="check-out">
+
+        <Button 
+          className="btn btn-checkout"
+          onClick={handleCheckout}
+        >
+            Оформити замовлення
+        </Button>
+
       </div>
       </div>
     </Wrapper>
@@ -239,7 +264,7 @@ const Wrapper = styled.section`
     }
   }
 
-  .cheak-out{
+  .check-out{
     display: flex;
     flex-direction: row;
     justify-content: flex-end;

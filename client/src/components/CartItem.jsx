@@ -1,7 +1,7 @@
 import React from "react";
 import CartAmountToggle from "./CartAmountToggle";
 import { FaTrash } from "react-icons/fa";
-import { useCartContext } from "../../context/cartContext";
+import { useCartContext } from "../context/cartContext";
 
 
 const CartItem = ({ id, name, image, price, amount }) => {
@@ -16,7 +16,7 @@ const CartItem = ({ id, name, image, price, amount }) => {
           </figure>
         </div>
         <div>
-          <p>{name} {0.5*amount}л</p>
+          <p>{name} {amount}шт.</p>
         </div>
       </div>
       {/* price   */}

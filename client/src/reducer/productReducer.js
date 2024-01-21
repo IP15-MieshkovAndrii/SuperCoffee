@@ -5,12 +5,18 @@ const ProductReducer = (state, action) => {
             ...state,
             isLoading: true,
           };
-    
+          
         case "SET_API_DATA":
           return {
             ...state,
             isLoading: false,
             products: action.payload,
+          };
+        case "SET_RECS_DATA":
+          return {
+            ...state,
+            isLoading: false,
+            recommendations: action.payload,
           };
     
         case "API_ERROR":

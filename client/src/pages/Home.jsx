@@ -1,5 +1,5 @@
 import React from "react";
-import FeatureProduct from "../components/FeatureProducts";
+import RecProducts from "../components/RecProducts";
 import HeroSection from "../components/HeroSection";
 import Services from "../components/Services";
 
@@ -11,7 +11,7 @@ const Home = () => {
     return (
         <>
             <HeroSection myData={data}/>
-            <FeatureProduct />
+            <RecProducts />
             <Services/>
 
         </>

@@ -11,9 +11,9 @@ import { GlobalStyle } from "./GlobalStyle";
 import { ThemeProvider } from "styled-components";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import Cheakout from "./pages/Cheakout";
+import Checkout from "./pages/Checkout";
 import Callback from "./pages/Callback";
-import Login from "./pages/Sign/Login";
+import Login from "./pages/Sign/Login.jsx";
 import Register from "./pages/Sign/Register.jsx";
 
 const App = () => {
@@ -56,7 +56,7 @@ const App = () => {
           <Route path="/contact" element={<Contact/>}/>
           <Route path="/singleproduct/:id" element={<SingleProduct/>}/>
           <Route path="/cart" element={<Cart/>}/>
-          <Route path="/cheakout" element={<Cheakout/>}/>
+          <Route path="/checkout" element={<Checkout/>}/>
           <Route path="/callback" element={<Callback/>}/>
           <Route path="/login" element={<Login/>}/>
           <Route path="/register" element={<Register/>}/>

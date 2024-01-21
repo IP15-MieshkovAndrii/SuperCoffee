@@ -1,10 +1,9 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { Button } from "../styles/Button";
 
 const HeroSection = ({myData}) => {
-    const navigate = useNavigate();
     const name = myData.name
     return (
         <Wrapper>
@@ -26,12 +25,10 @@ const HeroSection = ({myData}) => {
                             Обирайте SuperCoffee – ваш провідний провідник у світі смачної кави. Замовляйте прямо зараз та насолоджуйтеся кожним ковзанням ароматного нектару, який ми привозимо для вас з усього світу.
                         </p>
                         <br/>
-
-
-                        <Button onClick={() => navigate("/products")}>Перейти до меню</Button>
-
+                        <NavLink to="/products">
+                            <Button>Перейти до меню</Button>
+                        </NavLink>
                     </div>
-
                     <div className="hero-section-image">
                         <figure>
                             <img 

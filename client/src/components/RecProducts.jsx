@@ -1,34 +1,77 @@
 import { useProductContext } from "../context/productContext";
 import styled from "styled-components";
-import Product from "./product/Product";
+import Product from "./Product";
+import { useAuthState } from "../config/firebase";
+import { postRecommendations } from "../api/actions";
+import { useEffect, useState } from "react";
 
-const FeatureProduct = () => {
+
+const RecProducts = () => {
   const { isLoading, products } = useProductContext();
+  const { uid, isAuthenticated } = useAuthState();
+  const [recs, setRecs] = useState('');
 
-  if (isLoading) {
+
+  useEffect(() => {
+
+    async function getRecs(uid, isAuthenticated, products) {
+      try {
+    
+        if(isAuthenticated){
+          const recs = await postRecommendations({ user_id: uid, products: products});
+
+          if (Array.isArray(recs)){
+            setRecs(recs)
+          }
+        } else {
+          const recs = await postRecommendations({ user_id: "", products: products});
+
+          if (Array.isArray(recs)){
+            setRecs(recs)
+          }
+        }
+    ;
+      } catch (error) {
+        console.error('Error performing action and navigating:', error);
+      }
+    };
+
+    if(!isLoading)getRecs(uid, isAuthenticated, products)
+
+
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoading])
+
+
+  if (isLoading || !(Array.isArray(recs) && recs.length)) {
     return <div> ......Loading </div>;
   }
-  const sortedProducts = products.sort((a, b) => b.updated - a.updated);
-  const selectedProducts = sortedProducts.slice(0, 3);
 
+  let selectedProducts = recs;
+
+
+ 
   return (
-    <Wrapper className="section">
+    <WrapperRecs className="section">
       <div className="container">
         <div className="intro-data">Спробуй!</div>
-        <div className="common-heading">Новинка</div>
+        <div className="common-heading">Рекомендуємо</div>
         <div className="grid grid-three-column">
           {selectedProducts.map((curElem) => {
             return <Product key={curElem.id} {...curElem} />;
           })}
         </div>
       </div>
-    </Wrapper>
+    </WrapperRecs>
   );
 };
 
-const Wrapper = styled.section`
-  padding: 9rem 0;
+const WrapperRecs = styled.section`
+  margin: 0 0 4rem 0;
+  padding: 4rem 0;
   background-color: ${({ theme }) => theme.colors.bg};
+  border: 1px solid black;
 
   .container {
     max-width: 120rem;
@@ -131,4 +174,4 @@ const Wrapper = styled.section`
   }
 `;
 
-export default FeatureProduct;
+export default RecProducts;

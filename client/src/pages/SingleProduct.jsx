@@ -2,21 +2,22 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { useProductContext } from "../context/productContext";
-import PageNavigation from "../components/nav/PageNavigation";
+import PageNavigation from "../components/PageNavigation";
 import { Container } from "../styles/Container";
 import MyImage from "../components/MyImage";
-import AddToCart from "../components/cart/AddToCart";
+import AddToCart from "../components/AddToCart";
 import { renderDefaultCoffee } from "../functions/images";
+// import MyImage from "./components/MyImage";
 
 
 const SingleProduct = () => {
   const {getSingleProduct, isSingleLoading, singleProduct} = useProductContext();
   const {id} = useParams();
-  const [quantity, setQuantity] = useState(0.5);
+  const [quantity, setQuantity] = useState(1);
   const [priceB, setPriceB] = useState(0);
 
   const updateQuantity = (newAmount) => {
-    let newQuantity = 0.5 * newAmount;
+    let newQuantity = newAmount;
     let newPriceB = uah*newAmount;
     setPriceB(newPriceB)
     setQuantity(newQuantity);
@@ -46,8 +47,8 @@ const SingleProduct = () => {
   
 
   let defCoffee = "";
-  let coffee = "";
-  if (image) coffee = image.url;
+  let coffeeI = "";
+  if(image)coffeeI = image.url;
 
   if(categories){
     defCoffee = renderDefaultCoffee(categories);
@@ -60,11 +61,11 @@ const SingleProduct = () => {
       <Container className="container">
         <div className="grid grid-two-column">
           <div className="product-images">
-            <MyImage imgs={coffee || defCoffee} />
+            <MyImage imgs={coffeeI || defCoffee} />
           </div>
 
           <div className="product-data">
-            <h2>{name} {quantity}л</h2>
+            <h2>{name} {quantity}шт.</h2>
             <p className="product-data-price">
             ₴{priceB || uah}
             </p>

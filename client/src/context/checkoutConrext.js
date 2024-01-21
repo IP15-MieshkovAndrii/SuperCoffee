@@ -4,16 +4,14 @@ import checkoutReducer from "../reducer/checkoutReducer";
 const CheckoutContext = createContext();
 
 const initialState = {
-  // initial checkout state
+
   shippingAddress: "",
   paymentMethod: "",
-  // other properties related to checkout
 };
 
 const CheckoutProvider = ({ children }) => {
   const [state, dispatch] = useReducer(checkoutReducer, initialState);
 
-  // actions related to checkout
   const setShippingAddress = (address) => {
     dispatch({ type: "SET_SHIPPING_ADDRESS", payload: address });
   };
@@ -22,7 +20,6 @@ const CheckoutProvider = ({ children }) => {
     dispatch({ type: "SET_PAYMENT_METHOD", payload: method });
   };
 
-  // other actions and effects related to checkout
 
   return (
     <CheckoutContext.Provider value={{ ...state, setShippingAddress, setPaymentMethod }}>

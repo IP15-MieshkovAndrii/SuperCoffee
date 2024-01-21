@@ -1,11 +1,28 @@
 const http = require('node:http');
+const sequelize = require('./config/db');
+const router = require('./routes/router');
 
-const PORT = 8000;
+require('dotenv').config();
 
-http.createServer((req, res) => {
-    res.writeHead(200, { 'Content-Type': 'text/plain' });
-    res.end();
+const port = process.env.PORT || 8000;
+const hostname = process.env.HOSTNAME || '127.0.0.1'
 
-  }).listen(PORT);
+const server = http.createServer((req, res) => {
+  router(req, res);
+});
 
-  console.log(`Running server on port ${PORT}`);
+server.listen(port, hostname, () => {
+  console.log(`Server running at http://${hostname}:${port}/`)
+});
+
+server.on('error', err => {
+  if (err.code === 'EACCES') {
+    console.log(`No access to port: ${port}`);
+  }
+});
+
+sequelize.authenticate().then(() => {
+  console.log('Connection has been established successfully.');
+}).catch((error) => {
+  console.error('Unable to connect to the database: ', error);
+});

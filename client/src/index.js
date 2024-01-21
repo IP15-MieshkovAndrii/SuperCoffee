@@ -7,6 +7,7 @@ import { AppProvider } from "./context/productContext";
 import { FilterProvider } from "./context/filterContext";
 import { CartProvider } from "./context/cartContext";
 import { CheckoutProvider } from "./context/checkoutConrext"
+import { AuthContextProvider } from "./config/firebase";
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -14,13 +15,16 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
 
         <AppProvider>
-            <FilterProvider>
-                <CartProvider>
-                    <CheckoutProvider></CheckoutProvider>
-                    <App />
-                </CartProvider>
-            </FilterProvider>
+            <AuthContextProvider>
+                <FilterProvider>
+                    <CartProvider>
+                        <CheckoutProvider></CheckoutProvider>
+                        <App />
+                    </CartProvider>
+                </FilterProvider>
+            </AuthContextProvider>
         </AppProvider>
+
 );
 
 

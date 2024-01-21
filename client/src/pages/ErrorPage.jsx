@@ -1,10 +1,9 @@
-import { useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import {Button} from "../styles/Button"
 
 
 const ErrorPage = () => {
-  const navigate = useNavigate();
   return (
     <Wrapper>
       <div className="container">
@@ -17,8 +16,9 @@ const ErrorPage = () => {
              щоб повернутися на головну сторінку та ще раз орієнтуватися по зірках.
           </p>
 
-            <Button onClick={navigate('/')}>Повернутися на головну</Button>
-
+          <NavLink to="/">
+            <Button>Повернутися на головну</Button>
+          </NavLink>
         </div>
       </div>
     </Wrapper>

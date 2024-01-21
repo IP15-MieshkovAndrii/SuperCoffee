@@ -1,10 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import Product from "../product/Product";
+import Product from "./Product";
+import RecProducts from "./RecProducts";
+
 
 const GridView = ({ products }) => {
   return (
     <Wrapper className="section">
+      <RecProducts/>
       <div className="container grid grid-three-column">
         {products.map((curElem) => {
           return <Product key={curElem.id} {...curElem} />;
@@ -34,7 +37,6 @@ const Wrapper = styled.section`
     overflow: hidden;
     transition: all 0.5s linear;
     border-radius: 1rem 1rem 0 0;
-    height: 20rem;
     &::after {
       content: "";
       position: absolute;
@@ -53,9 +55,9 @@ const Wrapper = styled.section`
       transform: scale(1.2);
     }
     img {
-      width: 90%;
+      max-width: 90%;
       margin-top: 1.5rem;
-      object-fit: cover;
+      height: 20rem;
       transition: all 0.2s linear;
     }
   }

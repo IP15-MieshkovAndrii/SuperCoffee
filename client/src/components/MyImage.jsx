@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 
 const MyImage = ({ imgs}) => {
-  // const [mainImage, setMainImage] = useState(imgs[0]);
 
   return (
     <Wrapper>

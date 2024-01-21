@@ -34,17 +34,23 @@ export const FilterProvider = ({children}) => {
         let userValue = event.target.value;
         dispatch({ type: "GET_SORT_VALUE", payload: userValue });
       };
-    const updateFilterValue = (event) => {
-        let name = event.target.name;
-        let value = event.target.value;
+    const updateFilterValue = async (event) => {
 
-        return dispatch({ type: "UPDATE_FILTERS_VALUE", payload: { name, value } });
+        try {
+            let name = event.target.name;
+            let value = event.target.value;
+
+            if (value) value.toLowerCase();
+
+            return dispatch({ type: "UPDATE_FILTERS_VALUE", payload: { name, value } });
+          } catch (error) {
+            console.error('Error posting action and updating filters:', error);
+          }
     };
     const clearFilters = () => {
         dispatch({ type: "CLEAR_FILTERS" });
       };
 
-    // to sort the product
     useEffect(() => {
         dispatch({ type: "FILTER_PRODUCTS" });
         dispatch({ type: "SORTING_PRODUCTS" });

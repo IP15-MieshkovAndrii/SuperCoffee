@@ -3,7 +3,6 @@ import React, { useRef, useState} from "react";
 import styled from "styled-components";
 import { Form, Button } from 'semantic-ui-react';
 import 'react-phone-input-2/lib/style.css';
-// import 'semantic-ui-css/semantic.min.css'
 import PhoneInput from 'react-phone-input-2';
 import "react-datepicker/dist/react-datepicker.css";
 import { Controller, useForm } from 'react-hook-form'
@@ -12,10 +11,10 @@ import { useCartContext } from "../context/cartContext";
 import {LiqPay} from "../payment/liqpay";
 import { commerce } from "../lib/commerce";
 
-const payment = new LiqPay(process.env.PUBLIC_KEY_LIQPAY, process.env.PRIVATE_KEY_LIQPAY)
+const payment = new LiqPay('sandbox_i3877493362', 'sandbox_cz5z0KfADUcCRcRpYNpbToMcXMkDbAZDs4Fvg2Nh')
 
 
-const Cheakout = () => {
+const Checkout = () => {
     const { register, control, handleSubmit, formState: { errors } } = useForm()
     const inputRef = useRef(null);
     const navigate = useNavigate();
@@ -221,7 +220,7 @@ const Cheakout = () => {
                     <div key={index} className="cart-item">
                         <div className="items-data">
                             <h4>{item.name}</h4>
-                            <p>{item.amount * 0.5}л</p>
+                            <p>{item.amount}шт.</p>
                         </div>
                         <div className="price">
                             {item.price * item.amount}₴
@@ -388,4 +387,4 @@ const Wrapper = styled.section`
   `
 
 
-export default Cheakout;
+export default Checkout;

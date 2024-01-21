@@ -1,12 +1,11 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 const PageNavigation = ({ title }) => {
-  const navigate = useNavigate();
   return (
     <Wrapper>
-      <span onClick={navigate('/')}>Home</span>/ {title}
+      <NavLink to="/">Home</NavLink>/ {title}
     </Wrapper>
   );
 };

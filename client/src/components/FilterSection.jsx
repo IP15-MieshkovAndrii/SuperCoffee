@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { useFilterContext } from "../../context/filterContext";
-import { getCategory } from "../../functions/filter";
-import { Button } from "../../styles/Button";
+import { useFilterContext } from "../context/filterContext";
+import { getCategory } from "../functions/filter";
+import { Button } from "../styles/Button";
 
 const FilterSection = () => {
     const {

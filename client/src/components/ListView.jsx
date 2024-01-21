@@ -1,25 +1,26 @@
-import { useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import { Button } from "../../styles/Button";
-import { renderDefaultCoffee } from "../../functions/images";
+import { Button } from "../styles/Button";
+import { renderDefaultCoffee } from "../functions/images";
+import RecProducts from "./RecProducts";
 
 const ListView = ({ products }) => {
-  const navigate = useNavigate();
 
   return (
     <Wrapper className="section">
+      <RecProducts/>
       <div className="container grid">
         {products.map((curElem) => {
           const { id, name, image, price, description, categories } = curElem;
             let truncatedDescription = description.slice(0, 90) + "..."
             let defCoffee = "";
-            let Coffee = ""
-            if(image)Coffee = image.url;
+            let coffee = ""
+            if(image)coffee = image.url;
             defCoffee = renderDefaultCoffee(categories);
           return (
             <div key= {id} className="card grid grid-two-column">
               <figure>
-                <img src={Coffee || defCoffee} alt={name} />
+                <img src={coffee || defCoffee} alt={name} />
               </figure>
 
               <div className="card-data">
@@ -29,9 +30,9 @@ const ListView = ({ products }) => {
                 </p>
                 <p dangerouslySetInnerHTML={{ __html: truncatedDescription }}></p>
 
-                <span onClick={navigate(`/singleproduct/${id}`)} className="btn-main">
+                <NavLink to={`/singleproduct/${id}`} className="btn-main">
                   <Button className="btn">Показати більше</Button>
-                </span>
+                </NavLink>
               </div>
             </div>
           );
