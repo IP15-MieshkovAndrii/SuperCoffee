@@ -1,6 +1,6 @@
 const sequelize = require('../config/db');
 const Action = require('../models/action.model');
-const { formatData, getRatingForAction } = require('../utils/recommendation.functions');
+const { formatData } = require('../utils/recommendation.functions');
 const natural = require('natural');
 const TfIdf = natural.TfIdf;
 const tokenizer = new natural.WordTokenizer();
