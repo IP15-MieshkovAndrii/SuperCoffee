@@ -1,6 +1,6 @@
 const sequelize = require('../config/db');
 const Action = require('../models/action.model');
-const { formatData } = require('../utils/recommendation.functions');
+const { formatData, getRatingForAction } = require('../utils/recommendation.functions');
 const natural = require('natural');
 const TfIdf = natural.TfIdf;
 const tokenizer = new natural.WordTokenizer();
@@ -26,6 +26,7 @@ const createRecommendations = async (id, products) => {
         }
 
         userActions = actions;
+
 
         const productActionsMatrix = {};
 
@@ -55,11 +56,12 @@ const createRecommendations = async (id, products) => {
 
         recommendations.sort((a, b) => b.score - a.score);
 
+
         let recs = recommendations.slice(0, 3);
         let recProducts = [];
 
         if (recs.length && recs.length > 0) {
-            recs.map((rec) => {
+            recs.forEach((rec) => {
                 recProducts.push(products.find((product) => product.id === rec.product.id));
             });
         }
@@ -77,6 +79,7 @@ const createRecommendations = async (id, products) => {
     } catch (error) {
         console.error('Error in createRecommendations:', error);
     }
+
 
     return result;
 };
